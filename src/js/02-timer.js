@@ -33,6 +33,8 @@ flatpickr(datetimePicker, options);
 startButton.addEventListener('click', () => {
   const endTime = new Date(datetimePicker.value).getTime();
   startCountdown(endTime);
+  startButton.disabled = true;
+  datetimePicker.disabled = true;
 });
 
 function startCountdown(endTime) {
@@ -45,6 +47,8 @@ function startCountdown(endTime) {
       clearInterval(countdownInterval);
       updateTimer(0, 0, 0, 0);
       iziToast.success({ title: "Finished", message: "The countdown has ended!" });
+      startButton.disabled = false;
+      datetimePicker.disabled = false;
     } else {
       const { days, hours, minutes, seconds } = convertMs(timeLeft);
       updateTimer(days, hours, minutes, seconds);
